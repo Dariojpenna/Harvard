@@ -36,7 +36,7 @@ class Auction(models.Model):
     activated=models.BooleanField(default=True)
    
     def __str__(self):
-        return f"{self.id}: {self.article}  {self.image} {self.price} {self.date} {self.owner}"
+        return f"{self.id}: {self.article}  {self.image} {self.price} {self.date} {self.owner} {self.activated}"
 
 
 class Comment(models.Model):

@@ -213,6 +213,7 @@ def offer(request,id):
                 'form':commentForm(),
                 'comments':Comment.objects.filter(auction_id=id),
                 'accepted': False,
+                'owner':owner
             })
         else:
             newBid= Bid(user=user,bid=int(newOffer))
@@ -225,6 +226,7 @@ def offer(request,id):
                 'form':commentForm(),
                 'comments':Comment.objects.filter(auction_id=id),
                 'accepted':True,
+                'owner':owner
             })
 
 def removeAuction(request,id):
@@ -238,7 +240,7 @@ def removeAuction(request,id):
         'productList':productList,
         'form':commentForm(),
         'comments':Comment.objects.filter(auction_id=id),
-        'owner':owner
+        
     })
             
             
