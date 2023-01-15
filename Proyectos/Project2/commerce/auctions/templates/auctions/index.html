@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 >Active Listings</h2>
+    {% load humanize %}
+
+    <form action="{% url 'categories' %}" method="POST" >
+        {% csrf_token %}
+        <div>
+            <label for="category" >Choose a Category</label>
+            <select name="category" id="category">
+            {% for cat in categories %} 
+
+            <option value="{{cat}}">{{cat}}</option>
+
+            {%endfor%}
+            </select>
+            <input type="submit" value="Choose Category">
+        </div>
+
+    </form>
+    <ul  >
+        {% for auction in auctions %}
+    
+        <li style=" display: flex ;border: solid black 1px; margin: 10px;">
+            <div style ='display: inline-block;width: 30%'>
+                {% if auction.Image %} <img src="{{auction.Image.url}}" alt="" width="200" height="200">{% endif %}
+            </div>
+            <div style ='display: inline-block;width: 30%; margin-left: 150px;'>
+                <p> Article : {{auction.Article }} </p>   
+                <p> Current Price : ${{ auction.Price | intcomma}} </p> 
+                    
+                <p> {{ auction.Date}} </p>
+            </div>
+            <div style ='display: inline-block;position: relative ;margin-left: 20px; width: 80% ; overflow: auto;  '>
+                <p> Description : </p>
+                <p>{{ auction.Description}}</p>
+            </div>
+            <div >
+                    <a href="{% url 'product' auction.Article  %} " > View Product</a> 
+            </div>
+           
+            
+          
+
+                
+        
+        </li>
+   
+        {% endfor %}
+    
+    </ul>
+{% endblock %}

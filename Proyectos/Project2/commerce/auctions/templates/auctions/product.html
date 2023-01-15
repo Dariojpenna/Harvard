@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% load humanize %}
+
+<div>
+    {% if watchlist %}
+        <form action="{% url 'delete' Article=pro.Article %}" name="pro" method="get" enctype="multipart/form-data">
+            {% csrf_token %}
+        <button name="pro">Delete from WatchList</button>
+        </form>
+    {% else %}   
+        <form action="{% url 'watchlist' id=pro.id %}" name="pro" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <button name="pro">Add to Watch List</button>
+        </form>
+    {%endif%}
+
+</div>
+
+<div style ='display: inline-block;'>
+    {% if pro.Image %} <img src="{{pro.Image.url}}" alt="" width="200" height="200">{% endif %}
+</div>
+<div style ='display: inline-block; margin-left: 150px;'>
+    <p> Article : {{pro.Article }} </p>   
+    <p> Current Price : ${{ pro.Price | intcomma}} </p> 
+    <p>Owner: {{pro.Owner}}</p>
+    <p> {{ pro.Date}} </p>
+</div>
+<div style ='display: inline-block;margin: auto;'>
+    <p> Description :{{ pro.Description}} </p>
+    
+</div>
+
+
+
+
+
+{% endblock %}

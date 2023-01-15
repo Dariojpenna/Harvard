@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+        
+   <ul  >
+    {% for list in lists %}
+
+    <li style="border: solid black 1px; margin: 10px;">
+        <div style ='display: inline-block;'>
+            {% if list.Image %} <img  src="{{list.Image.url}}" alt="" width="200" height="200">{% endif %}
+        </div>
+        <div style ='display: inline-block; margin-left: 150px;'>
+            <p > Article : {{list.Article }} </p>   
+            <p> Initial Price : {{ list.Price}} </p> 
+            
+            <p> {{ list.Date}} </p>
+        </div>
+        <div style ='display: inline-block;margin: auto;'>
+            <p> Description :{{ list.Description}} </p>
+            
+        </div>
+
+        <div >
+            <a href="{% url 'delete' Article=list.Article  %} " > Delete From List</a> 
+        </div>
+        <div >
+            <a href="{% url 'product' list.Article  %} " > View Product</a> 
+        </div>
+        
+        
+       {%endfor%}
+
+    </li>
+
+   
+    
+    </ul>
+{% endblock %}
